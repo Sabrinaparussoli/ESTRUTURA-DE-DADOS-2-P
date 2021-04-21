@@ -1,0 +1,62 @@
+void lerArq(){
+	FILE *F;
+	F = fopen("cadastroARQ\\arquivo.txt", "r");
+	if (F==NULL){
+		print("ERRO AO LER O ARQUIVO!!!");
+		system("pause");
+		exit (0);
+	}else{
+		print("ARQUIVO CARREGADO!!!\n\n\n");
+	}
+	char c = fget(F);
+	while(c!=EOF){ //enquanto c nao for final de arquivo, ou seja, irá ler e imprimir cada caractere
+		printf("%c", c);
+		c=fget(F);
+	}
+}
+
+void addrArq(){
+	FILE *F;
+	F = fopen("cadastroARQ\\arquivo.txt", "a");
+	if(F == NULL){
+		printf("Erro ao abrir o arquivo \n\n");
+		system("pause");
+		exit(0);
+	}
+	
+	char dados[32]="\n Aula de estrutua de dados, A";
+	int i = 0;
+	for(i=0; i<strlen(dados); i++){
+		fputc(dados[i], F);
+	}
+	fclose(F);
+}
+
+
+int main() {
+	char nome, dt_N, end, resp;
+	int cpf;
+	do{
+		gravarArq();
+		
+		printf("======CADASTRO USERS======\n\n");
+		printf("Nome: ");
+		scanf("%s", &nome);
+		printf("Data Nascimento: ");
+		scanf("%s", &dt_N);
+		printf("CPF: ");
+		scanf("%s", &cpf);
+		printf("Enderenco: ");
+		scanf("%s", &end);
+		
+		
+		printf("============\n\n\n");
+		printf("DESEJA REALIZAR UM NOVO CADASTRO [S/N] \n\n");
+		scanf("%s", &resp);
+	}while (resp == 's');
+	
+	addArq();
+	lerArq();
+	
+	return 0;
+}
